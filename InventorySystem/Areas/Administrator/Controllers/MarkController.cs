@@ -32,25 +32,25 @@ namespace InventorySystem.Areas.Administrator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upsert(MarkRequest winery, CancellationToken cancellationToken)
+        public async Task<IActionResult> Upsert(MarkRequest Mark, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                if (winery.Id == 0)
+                if (Mark.Id == 0)
                 {
-                    await service.Add(winery, cancellationToken);
-                    TempData[StaticDefination.Successful] = "Successfully created winery";
+                    await service.Add(Mark, cancellationToken);
+                    TempData[StaticDefination.Successful] = "Successfully created Mark";
                 }
                 else
                 {
-                    TempData[StaticDefination.Successful] = "Successfully updated winery";
-                    await service.Update(winery.Id, winery, cancellationToken);
+                    TempData[StaticDefination.Successful] = "Successfully updated Mark";
+                    await service.Update(Mark.Id, Mark, cancellationToken);
                 }
 
                 return RedirectToAction(nameof(Index));
             }
-            TempData[StaticDefination.Error] = "Error when trying to save winery information";
-            return View(winery);
+            TempData[StaticDefination.Error] = "Error when trying to save Mark information";
+            return View(Mark);
         }
 
         #region API
